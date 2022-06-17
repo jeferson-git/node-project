@@ -4,7 +4,6 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { SalesModule } from './module/sales/sales.module';
 import { SalesModule } from './modules/sales/sales.module';
 import configuration from './config/configuration';
 
