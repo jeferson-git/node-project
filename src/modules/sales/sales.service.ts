@@ -1,26 +1,72 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+
+import { Repository } from 'typeorm';
+import { CurrencyTypesService } from '../currency-types/currency-types.service';
+
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 
+import { Sale } from './entities/sale.entity';
 @Injectable()
 export class SalesService {
-  create(createSaleDto: CreateSaleDto) {
-    return 'This action adds a new sale';
+  constructor(
+    @Inject('SALE_REPOSITORY')
+    private readonly repository: Repository<Sale>,
+    private readonly currencyTypeService: CurrencyTypesService,
+  ) {}
+
+  async create(createSaleDto: CreateSaleDto) {
+    const currencyType = await this.currencyTypeService.findOne(
+      createSaleDto.currencyTypeId,
+    );
+
+    if (!currencyType) {
+      throw new NotFoundException(
+        `Currency Type ${createSaleDto.currencyTypeId}, not Found !`,
+      );
+    }
+
+    const sale = this.repository.create(createSaleDto);
+    sale.currencyType = currencyType;
+    return this.repository.save(sale);
   }
 
-  findAll() {
-    return `This action returns all sales`;
+  findAll(): Promise<Sale[]> {
+    return this.repository.find({ relations: { currencyType: true } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sale`;
+  findOne(id: string) {
+    return this.repository.findOneBy({ id: id });
   }
 
-  update(id: number, updateSaleDto: UpdateSaleDto) {
-    return `This action updates a #${id} sale`;
+  async update(id: string, updateSaleDto: UpdateSaleDto) {
+    const sale = await this.repository.preload({
+      id,
+      ...updateSaleDto,
+    });
+
+    if (!sale) {
+      throw new NotFoundException(`Sale ${id}, not Found !`);
+    }
+
+    if (updateSaleDto.currencyTypeId) {
+      const currencyType = await this.currencyTypeService.findOne(
+        updateSaleDto.currencyTypeId,
+      );
+
+      if (!currencyType) {
+        throw new NotFoundException(
+          `Currency Type ${updateSaleDto.currencyTypeId}, not Found !`,
+        );
+      }
+
+      sale.currencyType = currencyType;
+    }
+
+    return this.repository.save(sale);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sale`;
+  async remove(id: string) {
+    return this.repository.delete(id);
   }
 }
