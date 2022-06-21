@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   Put,
+  Request,
 } from '@nestjs/common';
 
 import { SalesService } from './sales.service';
@@ -15,13 +16,24 @@ import { CreateSaleDto } from './dto/create-sale.dto';
 import { UpdateSaleDto } from './dto/update-sale.dto';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { AbilityFactory, Action } from '../ability/ability.factory';
+import { User } from '../users/entities/user.entity';
+import { CheckAbilities } from '../ability/ability.decorator';
+import { AbilitiesGuard } from '../ability/ability.guards';
 
 @Controller('sales')
 export class SalesController {
-  constructor(private readonly salesService: SalesService) {}
+  constructor(
+    private readonly salesService: SalesService,
+    private readonly abilityFactory: AbilityFactory,
+  ) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   create(@Body() createSaleDto: CreateSaleDto) {
     return this.salesService.create(createSaleDto);
   }

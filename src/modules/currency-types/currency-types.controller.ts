@@ -14,31 +14,51 @@ import { CreateCurrencyTypeDto } from './dto/create-currency-type.dto';
 import { UpdateCurrencyTypeDto } from './dto/update-currency-type.dto';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { AbilitiesGuard } from '../ability/ability.guards';
+import { CheckAbilities } from '../ability/ability.decorator';
+import { Action } from '../ability/ability.factory';
+import { User } from '../users/entities/user.entity';
 
 @Controller('currency-types')
 export class CurrencyTypesController {
   constructor(private readonly currencyTypesService: CurrencyTypesService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   create(@Body() createCurrencyTypeDto: CreateCurrencyTypeDto) {
     return this.currencyTypesService.create(createCurrencyTypeDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   findAll() {
     return this.currencyTypesService.findAll();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   findOne(@Param('id') id: string) {
     return this.currencyTypesService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Put(':id')
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   update(
     @Param('id') id: string,
     @Body() updateCurrencyTypeDto: UpdateCurrencyTypeDto,
@@ -46,8 +66,12 @@ export class CurrencyTypesController {
     return this.currencyTypesService.update(id, updateCurrencyTypeDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, AbilitiesGuard)
+  @CheckAbilities({
+    action: Action.Create,
+    subject: User,
+  })
   remove(@Param('id') id: string) {
     return this.currencyTypesService.remove(id);
   }

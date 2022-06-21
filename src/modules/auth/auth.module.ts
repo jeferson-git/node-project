@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constatnts';
 import { LoginController } from './login/login.controller';
+import { AbilityModule } from '../ability/ability.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { LoginController } from './login/login.controller';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1d' },
     }),
+    AbilityModule,
   ],
   controllers: [LoginController],
   providers: [AuthService, JwtStrategy, LocalStrategy],
