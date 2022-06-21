@@ -5,8 +5,9 @@ import { SalesController } from './sales.controller';
 import { DatabaseModule } from '../../database/database.module';
 import { salesProviders } from './sales.providers';
 import { CurrencyTypesModule } from '../currency-types/currency-types.module';
+import { AbilityModule } from '../ability/ability.module';
 @Module({
-  imports: [DatabaseModule, CurrencyTypesModule],
+  imports: [DatabaseModule, CurrencyTypesModule, AbilityModule],
   controllers: [SalesController],
   exports: [SalesService],
   providers: [...salesProviders, SalesService]

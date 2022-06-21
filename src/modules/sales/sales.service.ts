@@ -35,8 +35,11 @@ export class SalesService {
     return this.repository.find({ relations: { currencyType: true } });
   }
 
-  findOne(id: string) {
-    return this.repository.findOneBy({ id: id });
+  findOne(id: string): Promise<Sale> {
+    return this.repository.findOne({
+      where: { id: id },
+      relations: { currencyType: true },
+    });
   }
 
   async update(id: string, updateSaleDto: UpdateSaleDto) {

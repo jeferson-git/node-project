@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -12,6 +11,9 @@ export class User {
   @Column({ type: 'varchar', length: 150 })
   email: string;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'boolean' })
+  isAdmin: boolean;
+
+  @Column({ type: 'varchar', length: 200 })
   password: string;
 }
