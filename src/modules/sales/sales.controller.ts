@@ -7,8 +7,6 @@ import {
   Delete,
   UseGuards,
   Put,
-  Request,
-  Req,
   Query,
 } from '@nestjs/common';
 
@@ -19,7 +17,7 @@ import { UpdateSaleDto } from './dto/update-sale.dto';
 
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AbilityFactory, Action } from '../ability/ability.factory';
-import { User } from '../users/entities/user.entity';
+import { User } from '../users/register/entities/user.entity';
 import { CheckAbilities } from '../ability/ability.decorator';
 import { AbilitiesGuard } from '../ability/ability.guards';
 
