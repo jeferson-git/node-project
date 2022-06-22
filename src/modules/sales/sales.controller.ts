@@ -8,6 +8,8 @@ import {
   UseGuards,
   Put,
   Request,
+  Req,
+  Query,
 } from '@nestjs/common';
 
 import { SalesService } from './sales.service';
@@ -48,6 +50,12 @@ export class SalesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.salesService.findOne(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/reports/pdf')
+  reports(@Query() params: Array<string>) {
+    return this.salesService.reports(params);
   }
 
   @UseGuards(JwtAuthGuard)

@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
-import { Repository } from 'typeorm';
+import { Between, MoreThan, MoreThanOrEqual, Raw, Repository } from 'typeorm';
 import { CurrencyTypesService } from '../currency-types/currency-types.service';
 
 import { CreateSaleDto } from './dto/create-sale.dto';
@@ -39,6 +39,12 @@ export class SalesService {
     return this.repository.findOne({
       where: { id: id },
       relations: { currencyType: true },
+    });
+  }
+
+  async reports(param: Array<string>) {
+    return await this.repository.find({
+      where: { sale_date: Between(param['init_date'], param['final_date']) },
     });
   }
 
