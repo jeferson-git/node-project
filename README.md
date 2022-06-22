@@ -71,3 +71,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## Note : 
+
+- Apagar a pasta dist, quando o nest estiver apagando dados do banco com o syncronize : true
+
+- Problemas com o eol :  "git config core.autocrlf false" - "git rm --cached -r ." - git reset --hard
+
+## Tasks: 
+
+- Separar Rotas de Admin e !Admin
+- Crira end-point diferentes para Usuario do Sistema e Employers
