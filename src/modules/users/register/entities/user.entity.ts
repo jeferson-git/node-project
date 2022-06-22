@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Schedule } from '../../schedule/entities/schedule.entity';
 
 @Entity()
 export class User {
@@ -14,6 +15,9 @@ export class User {
   @Column({ type: 'boolean' })
   isAdmin: boolean;
 
-  @Column({ type: 'varchar', length: 200 })
+  @Column({ type: 'varchar', length: 200, select: false })
   password: string;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.users)
+  schedule: Schedule[];
 }
