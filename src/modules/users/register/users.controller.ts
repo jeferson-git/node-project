@@ -22,7 +22,7 @@ export class UsersController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     const salt = await bcrypt.genSalt();
-    createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
+    createUserDto.user_data.password = await bcrypt.hash(createUserDto.user_data.password, salt);
     return this.usersService.create(createUserDto);
   }
 
@@ -41,9 +41,9 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    if (updateUserDto.password) {
+    if (updateUserDto.user_data.password) {
       const salt = await bcrypt.genSalt();
-      updateUserDto.password = await bcrypt.hash(updateUserDto.password, salt);
+      updateUserDto.user_data.password = await bcrypt.hash(updateUserDto.user_data.password, salt);
     }
     return this.usersService.update(id, updateUserDto);
   }

@@ -9,10 +9,10 @@ export class CreateScheduleDto {
   @IsNotEmpty()
   final_hour: string;
 
-  @IsDateString('YYYY-MM-DD')
+  @IsDateString()
   @IsNotEmpty()
   date_work: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'userId do Usuário não deve ser Vazio' })
   userId: string;
 }

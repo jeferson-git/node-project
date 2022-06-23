@@ -6,8 +6,20 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 250 })
+  @Column({ type: 'varchar', length: 250, nullable: false })
   name: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: false })
+  surname: string;
+
+  @Column({ type: 'date' })
+  birthDate: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  rg: string;
+
+  @Column({ type: 'varchar', length: 15, nullable: true })
+  cpf: string;
 
   @Column({ type: 'varchar', length: 150 })
   email: string;
@@ -20,4 +32,7 @@ export class User {
 
   @OneToMany(() => Schedule, (schedule) => schedule.users)
   schedule: Schedule[];
+
+  // @OneToOne(() => Address, (address) => address.user)
+  // address: Address;
 }

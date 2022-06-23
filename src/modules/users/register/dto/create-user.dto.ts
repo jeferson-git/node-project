@@ -1,7 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 
 export class CreateUserDto {
+  @ValidateNested({ each: true })
+  @Type(() => User)
+  user_data: User;
+
+}
+class User {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -18,3 +25,4 @@ export class CreateUserDto {
   @IsBoolean()
   isAdmin:boolean
 }
+
