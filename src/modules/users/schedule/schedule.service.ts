@@ -22,25 +22,51 @@ export class ScheduleService {
         `User ${createScheduleDto.userId}, not Found !!`,
       );
     }
-    
-    const schedule = this.repository.create(createScheduleDto);
-    schedule.users = user;
+
+    const schedule = this.repository.create(createScheduleDto.schedule);
+
+    schedule.forEach((element) => {
+      element.user = user;
+    });
+
     return this.repository.save(schedule);
   }
 
   findAll() {
-    return `This action returns all schedule`;
+    return this.repository.find({ relations: { user: true } });
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} schedule`;
+    return this.repository.findOne({
+      where: { id: id },
+      relations: { user: true },
+    });
   }
 
-  update(id: string, updateScheduleDto: UpdateScheduleDto) {
-    return `This action updates a #${id} schedule`;
+  async update(id: string, updateScheduleDto: UpdateScheduleDto) {
+    const schedule = await this.repository.preload({
+      id: id,
+      ...updateScheduleDto,
+    });
+
+    if (!schedule) {
+      throw new NotFoundException(`Schedule ${id}, not found`);
+    }
+
+    if (updateScheduleDto.userId) {
+      const user = await this.userService.findOne(updateScheduleDto.userId);
+      if (!user) {
+        throw new NotFoundException(
+          `User ${updateScheduleDto.userId}, not Found !!`,
+        );
+      }
+      schedule.user = user;
+    }
+
+    return this.repository.save(schedule);
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} schedule`;
+  async remove(id: string) {
+    return this.repository.delete(id);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, Inject } from '@nestjs/common';
-// import { InjectRepository } from '@nestjs/typeorm';
+
 import { Repository } from 'typeorm';
 
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,13 +14,25 @@ export class UsersService {
     private readonly repository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = this.repository.create(createUserDto);
+  async create(userDto: CreateUserDto) {
+    const error = await this.repository.find({
+      where: [
+        { email: userDto.email },
+        { surname: userDto.surname },
+        { cpf: userDto.cpf },
+        { rg: userDto.rg },
+      ],
+    });
+    if (error.length) return false;
+
+    const user = this.repository.create(userDto);
     return this.repository.save(user);
   }
 
   findAll(): Promise<User[]> {
-    return this.repository.find();
+    return this.repository.find({
+      relations: { address: true, contact: true, contract: true },
+    });
   }
 
   findOne(id: string): Promise<User> {
@@ -28,7 +40,10 @@ export class UsersService {
   }
 
   findOneByEmail(email: string): Promise<User> {
-    return this.repository.findOneBy({ email: email });
+    return this.repository.findOne({
+      select: ['email', 'password'],
+      where: { email: email },
+    });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
