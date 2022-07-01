@@ -23,19 +23,23 @@ export class ScheduleService {
       );
     }
 
-    const schedule = this.repository.create(createScheduleDto);
-    schedule.users = user;
+    const schedule = this.repository.create(createScheduleDto.schedule);
+
+    schedule.forEach((element) => {
+      element.user = user;
+    });
+
     return this.repository.save(schedule);
   }
 
   findAll() {
-    return this.repository.find({ relations: { users: true } });
+    return this.repository.find({ relations: { user: true } });
   }
 
   findOne(id: string) {
     return this.repository.findOne({
       where: { id: id },
-      relations: { users: true },
+      relations: { user: true },
     });
   }
 
@@ -56,7 +60,7 @@ export class ScheduleService {
           `User ${updateScheduleDto.userId}, not Found !!`,
         );
       }
-      schedule.users = user;
+      schedule.user = user;
     }
 
     return this.repository.save(schedule);

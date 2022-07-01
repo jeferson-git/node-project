@@ -1,6 +1,15 @@
-import { IsDateString, IsMilitaryTime, IsNotEmpty } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDateString,
+  IsMilitaryTime,
+  IsNotEmpty,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { IScheduleInterface } from 'src/interfaces/users/schedule/IScheduleInterface';
+import { Schedule } from '../entities/schedule.entity';
 
-export class CreateScheduleDto {
+export class ScheduleDto {
   @IsMilitaryTime()
   @IsNotEmpty()
   init_hour: string;
@@ -12,7 +21,8 @@ export class CreateScheduleDto {
   @IsDateString()
   @IsNotEmpty()
   date_work: string;
-
-  @IsNotEmpty({ message: 'userId do Usuário não deve ser Vazio' })
+}
+export class CreateScheduleDto implements IScheduleInterface {
   userId: string;
+  schedule: Schedule[];
 }

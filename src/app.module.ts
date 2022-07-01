@@ -10,6 +10,9 @@ import { SalesModule } from './modules/sales/sales.module';
 import { CurrencyTypesModule } from './modules/currency-types/currency-types.module';
 import { AbilityModule } from './modules/ability/ability.module';
 import { ScheduleModule } from './modules/users/schedule/schedule.module';
+import { AddressModule } from './modules/users/address/address.module';
+import { ContactModule } from './modules/users/contact/contact.module';
+import { ContractModule } from './modules/users/contract/contract.module';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { ScheduleModule } from './modules/users/schedule/schedule.module';
     CurrencyTypesModule,
     AbilityModule,
     ScheduleModule,
+    AddressModule,
+    ContactModule,
+    ContractModule,
   ],
 })
 export class AppModule {}

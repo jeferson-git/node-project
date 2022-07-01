@@ -23,5 +23,5 @@ export class Schedule {
 
   @ManyToOne(() => User, (user) => user.schedule)
   @JoinColumn()
-  users: User;
+  user: User;
 }

@@ -1,7 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  Unique,
+} from 'typeorm';
+import { Address } from '../../address/entities/address.entity';
+import { Contact } from '../../contact/entities/contact.entity';
+import { Contract } from '../../contract/entities/contract.entity';
 import { Schedule } from '../../schedule/entities/schedule.entity';
 
 @Entity()
+@Unique(['surname', 'email', 'cpf', 'rg'])
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -12,7 +23,7 @@ export class User {
   @Column({ type: 'varchar', length: 100, nullable: false })
   surname: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   birthDate: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
@@ -30,9 +41,15 @@ export class User {
   @Column({ type: 'varchar', length: 200, select: false })
   password: string;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.users)
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
   schedule: Schedule[];
 
-  // @OneToOne(() => Address, (address) => address.user)
-  // address: Address;
+  @OneToOne(() => Address, (address) => address.user)
+  address: Address;
+
+  @OneToOne(() => Contact, (contact) => contact.user)
+  contact: Contact;
+
+  @OneToOne(() => Contract, (contract) => contract.user)
+  contract: Contract;
 }

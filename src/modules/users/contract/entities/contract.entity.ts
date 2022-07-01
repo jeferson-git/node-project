@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from './user.entity';
+import { User } from '../../register/entities/user.entity';
 
 @Entity()
 export class Contract {
@@ -21,10 +21,10 @@ export class Contract {
   @Column({ type: 'varchar', length: 25 })
   jobFunction: string;
 
-  @Column({ type: 'float' })
-  payment: number;
+  @Column({ type: 'varchar', length: 50 })
+  payment: string;
 
-  @OneToOne(() => User, { cascade: true })
+  @OneToOne(() => User, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn()
   user: User;
 }

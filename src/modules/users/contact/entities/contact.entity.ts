@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from './user.entity';
+import { User } from '../../register/entities/user.entity';
 
 @Entity()
 export class Contact {
@@ -15,13 +15,10 @@ export class Contact {
   @Column({ type: 'varchar', length: 250 })
   cel: string;
 
-  @Column({ type: 'varchar', length: 25 })
+  @Column({ type: 'varchar', length: 125, nullable: true })
   alternativeContact: string;
 
-  @Column({ type: 'varchar', length: 25 })
-  email: string;
-
-  @OneToOne(() => User, { cascade: true })
+  @OneToOne(() => User, { cascade: true, onDelete: 'CASCADE' })
   @JoinColumn()
   user: User;
 }
