@@ -13,7 +13,6 @@ import { ScheduleModule } from './modules/users/schedule/schedule.module';
 import { AddressModule } from './modules/users/address/address.module';
 import { ContactModule } from './modules/users/contact/contact.module';
 import { ContractModule } from './modules/users/contract/contract.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),

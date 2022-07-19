@@ -35,10 +35,10 @@ export class CurrencyTypesController {
 
   @Get()
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
-  @CheckAbilities({
-    action: Action.Create,
-    subject: User,
-  })
+  // @CheckAbilities({
+  //   action: Action.Create,
+  //   subject: User,
+  // })
   findAll() {
     return this.currencyTypesService.findAll();
   }

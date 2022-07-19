@@ -30,10 +30,10 @@ export class SalesController {
 
   @Post()
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
-  @CheckAbilities({
-    action: Action.Create,
-    subject: User,
-  })
+  // @CheckAbilities({
+  //   action: Action.Create,
+  //   subject: User,
+  // })
   create(@Body() createSaleDto: CreateSaleDto) {
     return this.salesService.create(createSaleDto);
   }
