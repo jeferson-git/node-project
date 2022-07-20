@@ -79,7 +79,12 @@ Nest is [MIT licensed](LICENSE).
 
 - Problemas com o eol :  "git config core.autocrlf false" - "git rm --cached -r ." - git reset --hard
 
+-- Error de : "No metadata for "EntityName#Relation" was found. Possivelmente, nao foi declarado "@Entity() no ínicio da classe";
+
 ## Tasks: 
 
-- Separar Rotas de Admin e !Admin
+- Separar Rotas de Admin e !Admin \\ AbilitiesGuard - está adicionado mas trava rota como admin, estudar mais sobre o uso; 
 - Crira end-point diferentes para Usuario do Sistema e Employers
+- Delete, fazer veriricação antes de Deletar
+- Ajuste do retorno do USUARIO que logar ( trazer as informações )
+- Ajustar retorno dos END-POINTS / estudar para trazer um response mais detalhados;
