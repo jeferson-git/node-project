@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Type } from 'class-transformer';
-import { IsBoolean, IsDateString, IsEmail, IsNotEmpty, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsBoolean, IsDateString, IsEmail, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 
-import { IUserInterface } from '../../../../interfaces/users/register/IUserInterface';
+import { IUserInterface } from '../../../../interfaces/IUserInterface';
 
 import { CreateAddressDto } from '../../address/dto/create-address.dto';
 import { CreateContactDto } from '../../contact/dto/create-contact.dto';

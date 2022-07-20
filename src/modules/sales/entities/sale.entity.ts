@@ -10,7 +10,7 @@ export class Sale {
     @Column({ type: 'date' })
     sale_date: string;
 
-    @Column({type: 'varchar', length: 100})
+    @Column({type: 'decimal', precision:15, scale:2, default:0})
     value: string;
 
     @ManyToOne(() => CurrencyType, (currencyType) => currencyType.sale)

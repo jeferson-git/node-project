@@ -13,7 +13,9 @@ import { ScheduleModule } from './modules/users/schedule/schedule.module';
 import { AddressModule } from './modules/users/address/address.module';
 import { ContactModule } from './modules/users/contact/contact.module';
 import { ContractModule } from './modules/users/contract/contract.module';
-
+import { ProductsModule } from './modules/products/products.module';
+import { CategoryModule } from './modules/category/category.module';
+import { ProvidersModule } from './modules/providers/providers.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
@@ -27,6 +29,9 @@ import { ContractModule } from './modules/users/contract/contract.module';
     AddressModule,
     ContactModule,
     ContractModule,
+    ProductsModule,
+    CategoryModule,
+    ProvidersModule,
   ],
 })
 export class AppModule {}

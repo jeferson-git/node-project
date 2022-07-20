@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { IAddressinterface } from 'src/interfaces/users/register/IAddressInterface';
+import { IAddressinterface } from 'src/interfaces/IAddressInterface';
 import { User } from '../../register/entities/user.entity';
 
 export class CreateAddressDto implements IAddressinterface {

@@ -45,6 +45,7 @@ export class SalesService {
   async reports(param: Array<string>) {
     return await this.repository.find({
       where: { sale_date: Between(param['init_date'], param['final_date']) },
+      relations: { currencyType: true },
     });
   }
 
