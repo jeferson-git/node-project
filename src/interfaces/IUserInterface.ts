@@ -1,7 +1,8 @@
 interface IUserInterface {
-  birthDate?: string;
-  rg?: string;
-  cpf?: string;
+  login: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
 }
 
 export { IUserInterface };

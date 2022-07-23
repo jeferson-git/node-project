@@ -17,7 +17,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AbilitiesGuard } from '../ability/ability.guards';
 import { CheckAbilities } from '../ability/ability.decorator';
 import { Action } from '../ability/ability.factory';
-import { User } from '../users/register/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @Controller('currency-types')
 export class CurrencyTypesController {
