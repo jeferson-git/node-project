@@ -75,7 +75,7 @@ Nest is [MIT licensed](LICENSE).
 
 ## Note : 
 
-- Apagar a pasta dist, quando o nest estiver apagando dados do banco com o syncronize : true
+- Apagar a pasta dist, quando alterar colunas do bancocom o syncronize : true
 
 - Problemas com o eol :  "git config core.autocrlf false" - "git rm --cached -r ." - git reset --hard
 

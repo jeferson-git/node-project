@@ -14,7 +14,7 @@ import { CheckAbilities } from '../ability/ability.decorator';
 import { Action } from '../ability/ability.factory';
 import { AbilitiesGuard } from '../ability/ability.guards';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { User } from '../users/register/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';

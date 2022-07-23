@@ -4,18 +4,19 @@ import configuration from './config/configuration';
 
 import { ConfigModule } from '@nestjs/config';
 
-import { UsersModule } from './modules/users/register/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SalesModule } from './modules/sales/sales.module';
 import { CurrencyTypesModule } from './modules/currency-types/currency-types.module';
 import { AbilityModule } from './modules/ability/ability.module';
-import { ScheduleModule } from './modules/users/schedule/schedule.module';
-import { AddressModule } from './modules/users/address/address.module';
-import { ContactModule } from './modules/users/contact/contact.module';
-import { ContractModule } from './modules/users/contract/contract.module';
+import { ScheduleModule } from './modules/schedule/schedule.module';
+import { AddressModule } from './modules/address/address.module';
+import { ContactModule } from './modules/contact/contact.module';
+import { ContractModule } from './modules/contract/contract.module';
 import { ProductsModule } from './modules/products/products.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProvidersModule } from './modules/providers/providers.module';
+import { PersonsModule } from './modules/persons/persons.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
@@ -32,6 +33,7 @@ import { ProvidersModule } from './modules/providers/providers.module';
     ProductsModule,
     CategoryModule,
     ProvidersModule,
+    PersonsModule,
   ],
 })
 export class AppModule {}
