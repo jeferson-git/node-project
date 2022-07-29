@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsBoolean, IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { Equals, IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
 
 import { IUserInterface } from '../../../interfaces/IUserInterface';
 
@@ -17,16 +17,17 @@ export class CreateUserDto implements IUserInterface {
   @IsString()
   password: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @Matches('password')
-  confirmPassword: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // // @Matches('password')
+  // confirmPassword: string;
 
   @IsNotEmpty()
   @IsBoolean()
   isAdmin: boolean;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   personId: string;
+
 }

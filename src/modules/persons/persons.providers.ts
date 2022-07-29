@@ -1,4 +1,3 @@
-import { IResponseInterface } from 'src/interfaces/IResponseInterface';
 import { DataSource } from 'typeorm';
 import { Person } from './entities/person.entity';
 

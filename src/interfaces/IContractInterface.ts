@@ -1,4 +1,5 @@
 interface IContractInterface {
+  id: string;
   contractDate: string;
   officeHour: string;
   jobFunction: string;

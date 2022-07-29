@@ -27,17 +27,17 @@ export class AddressService {
   }
 
   async update(id: string, updateAddressDto: UpdateAddressDto) {
-    // const addressId = await this.repository.findOneOrFail({
-    //   where: { user: { id: id } },
-    // });
-    // const address = await this.repository.preload({
-    //   id: addressId.id,
-    //   ...updateAddressDto,
-    // });
-    // if (!address) {
-    //   throw new NotFoundException(`Address ${addressId.id}, not found`);
-    // }
-    // return this.repository.save(address);
+    const addressId = await this.repository.findOneOrFail({
+      where: { person: { id: id } },
+    });
+    const address = await this.repository.preload({
+      id: addressId.id,
+      ...updateAddressDto,
+    });
+    if (!address) {
+      throw new NotFoundException(`Address ${addressId.id}, not found`);
+    }
+    return this.repository.save(address);
   }
 
   async remove(id: string) {

@@ -8,27 +8,18 @@ import {
   Delete,
   Put,
   UseGuards,
-  NotFoundException,
   BadRequestException,
   RequestMethod,
-  HttpCode,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import * as bcrypt from 'bcrypt';
-import { Address } from '../address/entities/address.entity';
 import { AddressService } from '../address/address.service';
-import { CreateAddressDto } from '../address/dto/create-address.dto';
-import { CreateContactDto } from '../contact/dto/create-contact.dto';
 import { ContactService } from '../contact/contact.service';
 import { ContractService } from '../contract/contract.service';
-import { CreateContractDto } from '../contract/dto/create-contract.dto';
-import { UpdateAddressDto } from '../address/dto/update-address.dto';
 import { User } from './entities/user.entity';
-import { json } from 'stream/consumers';
-
 @Controller('users')
 export class UsersController {
 
@@ -51,9 +42,9 @@ export class UsersController {
     createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
     const user = await this.usersService.create(createUserDto);
 
-    // if (!user) {
-    //   throw new BadRequestException(`User not created`, 'Already Exists data: CPF, RG, EMAIL or SURNAME!');
-    // }
+    if (!user) {
+      throw new BadRequestException(`User not created`, 'Already Exists data: CPF, RG, EMAIL or SURNAME!');
+    }
 
     // const createAddressDto = new CreateAddressDto();
     // createAddressDto.cep = createUserDto.address.cep;
@@ -98,7 +89,7 @@ export class UsersController {
     //   throw new BadRequestException(`Contract not created!, User ${user.id} removed`);
     // }
 
-    // return this.setResponse(user, RequestMethod.POST);
+    return this.setResponse(user, RequestMethod.POST);
 
   }
 

@@ -30,12 +30,18 @@ export class Person implements IPersonInterface {
   @OneToOne(() => User)
   user: User;
 
-  @OneToOne(() => Address, (address) => address.person, { cascade: true })
+  @OneToOne(() => Address, (address) => address.person, {
+    cascade: true,
+  })
   address: Address;
 
-  @OneToOne(() => Contact, (contact) => contact.person, { cascade: true })
+  @OneToOne(() => Contact, (contact) => contact.person, {
+    cascade: true,
+  })
   contact: Contact;
 
-  @OneToOne(() => Contract, (contract) => contract.person, { cascade: true })
+  @OneToOne(() => Contract, (contract) => contract.person, {
+    cascade: true,
+  })
   contract: Contract;
 }

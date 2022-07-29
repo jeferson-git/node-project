@@ -18,7 +18,10 @@ export class Contact {
   @Column({ type: 'varchar', length: 125, nullable: true })
   alternativeContact: string;
 
-  @OneToOne(() => Person, { cascade: true, onDelete: 'CASCADE' })
+  @OneToOne(() => Person, (person) => person.contact, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn()
   person: Person;
 }
