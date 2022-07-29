@@ -29,6 +29,7 @@ export class Address {
 
   @OneToOne(() => Person, (person) => person.address, {
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   @JoinColumn()
   person: Person;

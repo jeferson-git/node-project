@@ -15,17 +15,8 @@ export class UsersService {
   ) {}
 
   async create(userDto: CreateUserDto) {
-    // const error = await this.repository.find({
-    //   where: [
-    //     { email: userDto.email },
-    //     { surname: userDto.surname },
-    //     { cpf: userDto.cpf },
-    //     { rg: userDto.rg },
-    //   ],
-    // });
-    // if (error.length) return false;
-    // const user = this.repository.create(userDto);
-    // return this.repository.save(user);
+    const user = this.repository.create(userDto);
+    return this.repository.save(user);
   }
 
   findAll() {

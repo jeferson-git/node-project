@@ -12,23 +12,23 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
-    // const user = await this.usersService.findOneByEmail(email);
-    // if (!user) {
-    //   throw new NotFoundException(`User Not Found, ${email} !!`);
-    // }
-    // const isMatch = await bcrypt.compare(pass, user.password);
-    // console.log('aqui');
-    // if (user && isMatch) {
-    //   const date = new Date();
-    //   return {
-    //     message: 'Loggin Successful ..',
-    //     username: user.name,
-    //     userId: user.id,
-    //     isAdmin: user.isAdmin,
-    //     data: new Date(date.getFullYear(), date.getMonth(), date.getDay()),
-    //   };
-    // }
-    // return null;
+    const user = await this.usersService.findOneByEmail(email);
+    if (!user) {
+      throw new NotFoundException(`User Not Found, ${email} !!`);
+    }
+    const isMatch = await bcrypt.compare(pass, user.password);
+    console.log('aqui');
+    if (user && isMatch) {
+      const date = new Date();
+      return {
+        message: 'Loggin Successful ..',
+        username: user.login,
+        userId: user.id,
+        isAdmin: user.isAdmin,
+        data: new Date(date.getFullYear(), date.getMonth(), date.getDay()),
+      };
+    }
+    return null;
   }
 
   async login(user: any) {

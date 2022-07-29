@@ -1,6 +1,7 @@
 import {
   IsCurrency,
   IsDateString,
+  IsNotEmpty,
   IsOptional,
   IsString,
 } from 'class-validator';
@@ -8,6 +9,10 @@ import { IContractInterface } from 'src/interfaces/IContractInterface';
 import { User } from '../../users/entities/user.entity';
 
 export class CreateContractDto implements IContractInterface {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
   @IsOptional()
   @IsDateString()
   contractDate: string;

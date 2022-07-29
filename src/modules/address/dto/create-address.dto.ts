@@ -1,8 +1,11 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { IAddressinterface } from 'src/interfaces/IAddressInterface';
-import { User } from '../../users/entities/user.entity';
 
 export class CreateAddressDto implements IAddressinterface {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
   @IsNotEmpty()
   @IsString()
   street: string;
@@ -19,7 +22,7 @@ export class CreateAddressDto implements IAddressinterface {
   @IsString()
   number: string;
 
-  // @IsNotEmpty()
-  // @IsString()
-  // personId: string;
+  @IsNotEmpty()
+  @IsString()
+  personId: string;
 }

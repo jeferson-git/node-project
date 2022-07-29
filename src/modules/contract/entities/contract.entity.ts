@@ -24,7 +24,10 @@ export class Contract {
   @Column({ type: 'varchar', length: 50 })
   payment: string;
 
-  @OneToOne(() => Person, { cascade: true, onDelete: 'CASCADE' })
+  @OneToOne(() => Person, (person) => person.contract, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn()
   person: Person;
 }
