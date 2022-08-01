@@ -3,10 +3,15 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
+import { Sale } from 'src/modules/sales/entities/sale.entity';
+import { Order } from 'src/modules/orders/entities/order.entity';
+import { OrderHasProduct } from 'src/modules/orders/entities/order.entity';
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn('uuid')
@@ -24,4 +29,12 @@ export class Product {
   @ManyToOne(() => Category, (category) => category.product)
   @JoinColumn()
   category: Category;
+
+  @OneToMany(
+    () => OrderHasProduct,
+    (orderHasProduct) => orderHasProduct.product,
+  )
+  orderHasProduct: OrderHasProduct[];
+  // @ManyToMany(() => Order, (order) => order.products)
+  // order: Order[];
 }

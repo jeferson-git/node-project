@@ -32,7 +32,9 @@ export class SalesService {
   }
 
   findAll(): Promise<Sale[]> {
-    return this.repository.find({ relations: { currencyType: true } });
+    return this.repository.find({
+      relations: ['currencyType', 'order', 'order.orderHasProduct'],
+    });
   }
 
   findOne(id: string): Promise<Sale> {

@@ -25,10 +25,10 @@ export class CurrencyTypesController {
 
   @Post()
   @UseGuards(JwtAuthGuard, AbilitiesGuard)
-  @CheckAbilities({
-    action: Action.Create,
-    subject: User,
-  })
+  // @CheckAbilities({
+  //   action: Action.Create,
+  //   subject: User,
+  // })
   create(@Body() createCurrencyTypeDto: CreateCurrencyTypeDto) {
     return this.currencyTypesService.create(createCurrencyTypeDto);
   }

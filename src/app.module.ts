@@ -17,6 +17,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProvidersModule } from './modules/providers/providers.module';
 import { PersonsModule } from './modules/persons/persons.module';
+import { OrdersModule } from './modules/orders/orders.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
@@ -34,6 +35,7 @@ import { PersonsModule } from './modules/persons/persons.module';
     CategoryModule,
     ProvidersModule,
     PersonsModule,
+    OrdersModule,
   ],
 })
 export class AppModule {}
